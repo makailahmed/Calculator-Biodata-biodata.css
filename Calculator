@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator with Voice Command</title>
+    <title>Calculator</title>
     <style>
         body {
             display: flex;
@@ -109,7 +109,6 @@
             <button class="equal" onclick="calculateResult()">=</button>
             <button class="operator" onclick="appendToDisplay('/')">/</button>
         </div>
-        <button onclick="startVoiceRecognition()">Start Voice</button>
     </div>
     
     <script>
@@ -145,45 +144,31 @@
             }
         }
 
-        // Start Voice Recognition
-        function startVoiceRecognition() {
-            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-            recognition.lang = 'en-US';
-            recognition.continuous = false;
-            recognition.interimResults = false;
+        // Add keyboard support
+        document.addEventListener('keydown', function(e) {
+            const display = document.getElementById('display');
+            const key = e.key;
 
-            recognition.onstart = function () {
-                console.log('Voice recognition started...');
-            };
+            // Number keys and basic operators
+            if ('0123456789/*-+().'.includes(key)) {
+                appendToDisplay(key);
+            }
 
-            recognition.onerror = function (event) {
-                console.error('Speech recognition error', event);
-            };
-
-            recognition.onresult = function (event) {
-                const spokenText = event.results[0][0].transcript;
-                console.log('You said: ', spokenText);
-
-                // Parse spoken text to append correct digits and operators
-                const operators = ['+', '-', '*', '/', 'plus', 'minus', 'times', 'divided by'];
-                let parsedExpression = spokenText.toLowerCase();
-
-                // Replace word operators with symbols
-                operators.forEach(operator => {
-                    if (parsedExpression.includes(operator)) {
-                        if (operator === 'plus') parsedExpression = parsedExpression.replace(operator, '+');
-                        if (operator === 'minus') parsedExpression = parsedExpression.replace(operator, '-');
-                        if (operator === 'times') parsedExpression = parsedExpression.replace(operator, '*');
-                        if (operator === 'divided by') parsedExpression = parsedExpression.replace(operator, '/');
-                    }
-                });
-
-                // Append the parsed expression to the display
-                appendToDisplay(parsedExpression);
-            };
-
-            recognition.start();
-        }
+            // Function keys
+            if (key === 's') {
+                appendToDisplay('sin(');
+            } else if (key === 'c') {
+                appendToDisplay('cos(');
+            } else if (key === 't') {
+                appendToDisplay('tan(');
+            } else if (key === 'l') {
+                appendToDisplay('log(');
+            } else if (key === 'Enter') {
+                calculateResult();
+            } else if (key === 'Escape') {
+                clearDisplay();
+            }
+        });
     </script>
 </body>
 </html>
