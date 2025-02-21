@@ -14,7 +14,7 @@
             <div class="inline-group">
                 <div>
                     <label for="name">Full Name:</label>
-                    <input type="text" id="name" required>
+                    <input type="text" id="name" placeholder="Type your Full Name:" required>
                 </div>
                 <div>
                     <label for="dob">Date of Birth:</label>
@@ -25,16 +25,16 @@
             <div class="inline-group">
                 <div>
                     <label for="phone">Phone:</label>
-                    <input type="tel" id="phone" required>
+                    <input type="tel" id="phone" placeholder="Type your Phone Number" required>
                 </div>
                 <div>
                     <label for="email">Email:</label>
-                    <input type="email" id="email" required>
+                    <input type="email" id="email" placeholder="Type your email" required>
                 </div>
             </div>
 
             <label for="address">Address:</label>
-            <textarea id="address" required></textarea>
+            <textarea id="address" placeholder="Type Your Address" required></textarea>
 
             <div class="inline-group">
                 <div>
@@ -48,7 +48,7 @@
                 </div>
                 <div>
                     <label for="weight">Weight (kg):</label>
-                    <input type="number" id="weight" required>
+                    <input type="number" id="weight" placeholder="Type Your weight" required>
                 </div>
             </div>
 
@@ -64,7 +64,17 @@
             <div class="inline-group">
                 <div>
                     <label for="nationality">Nationality:</label>
-                    <input type="text" id="nationality" required>
+                    <select id="nationality" name="nationality">
+                        <option value="" selected disabled>Select your nationality</option>
+                        <option value="Bangladeshi">Bangladeshi</option>
+                        <option value="American">American</option>
+                        <option value="Canadian">Canadian</option>
+                        <option value="British">British</option>
+                        <option value="Australian">Australian</option>
+                        <option value="Indian">Indian</option>
+                        <option value="Pakistani">Pakistani</option>
+                        <option value="Other">Other</option>
+                    </select>
                 </div>
                 <div>
                     <label for="bloodGroup">Blood Group:</label>
@@ -110,9 +120,20 @@
             </div>
 
             <label for="hobbies">Hobbies:</label>
-            <textarea id="hobbies" required></textarea>
+            <textarea id="hobbies" placeholder="Type your hobbies:" required></textarea>
 
-            <button type="button" onclick="submitForm()">Submit</button>
+            <label for="image">Upload Image:</label>
+<input type="file" id="image" accept="image/*">
+
+<div id="imagePreview" style="display:none;">
+    <h4>Uploaded Image:</h4>
+    <img id="uploadedImage" src="" alt="Your Image" style="max-width: 200px; max-height: 200px;"/>
+</div>
+
+<button type="button" onclick="submitForm()">Submit</button>
+
+
+           
         </form>
 
         <div id="output"></div>
